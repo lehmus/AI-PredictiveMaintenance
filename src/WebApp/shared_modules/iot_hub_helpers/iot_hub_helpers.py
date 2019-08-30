@@ -58,7 +58,6 @@ class IoTHub:
 
         sas = 'SharedAccessSignature ' + urlencode(rawtoken)
         return sas
-        # return 'HostName={0}{1};DeviceId={2};SharedAccessSignature={3}'.format(self.iothub_name, self.suffix, device_id, sas)
 
 
     def update_twin(self, device_id, payload, etag = '*'):
@@ -85,10 +84,7 @@ class IoTHub:
         if 'tags' not in keys:
             payload_json['tags'] = {}
 
-        if 'desiredproperties' not in keys:
-            payload_json['desiredProperties'] = {}
-
-        payload= json.dumps(payload_json)
+        payload = json.dumps(payload_json)
 
         r = requests.patch(twin_url, data=payload, headers=headers)
 
